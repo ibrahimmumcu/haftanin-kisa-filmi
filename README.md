@@ -1,16 +1,6 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9888cf7b-c576-45f0-bbe0-a9e729855ac6/deploy-status)](https://app.netlify.com/sites/haftaninkisafilmi/deploys)
-
-# Haftanın Kısa Filmi
-
-[Haftanın Kısa Filmi](https://haftaninkisafilmi.com) This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.3.
-
-
-## Development
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
+<div align="center">
+  <h2>Haftanın Kısa Filmi</h2>
+  <img src="src/assets/img/icon.png" alt="haftanin kisa filmi logo" width="360"><br>
+  <br>Clean UI for short movies have been published on <a href="https://filmloverss.com" target="_blank">Filmloverss</a>, by Filmloverss team.<br><br>
+  <a href="https://app.netlify.com/sites/haftaninkisafilmi/deploys"><img src="https://api.netlify.com/api/v1/badges/9888cf7b-c576-45f0-bbe0-a9e729855ac6/deploy-status" alt="Netlify Deploy Status"></a>
+</div>
