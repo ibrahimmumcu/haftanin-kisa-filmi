@@ -1,0 +1,28 @@
+<div class="page-container" [style.backgroundImage]="'url('+ currentMovie.featuredImage +')'">
+
+  <div class="overlay">
+
+    <div class="video-container">
+      <div #videoContainer class="video-wrapper" [innerHtml]="currentMovie.videoEmbed | safe: 'html'"></div>
+      <div class="info">
+        <div class="title">{{currentMovie.title}}</div>
+        <div class="description">
+          {{currentMovie.description}}
+          <a [href]="'https://filmloverss.com/' + currentMovie.link" target="_blank" rel="noreferrer">Devamı</a>
+        </div>
+      </div>
+    </div>
+
+    <a class="previous" *ngIf="previousMovie" [routerLink]="['/film', previousMovie.link]" >
+      <img src="../../../assets/icons/previous.svg" alt="Önceki Film">
+      <span>{{previousMovie.title}}</span>
+    </a>
+
+    <a class="next" *ngIf="nextMovie" [routerLink]="['/film', nextMovie.link]">
+      <img src="../../../assets/icons/next.svg" alt="Sonraki Film">
+      <span>{{nextMovie.title}}</span>
+    </a>
+
+  </div>
+
+</div>
