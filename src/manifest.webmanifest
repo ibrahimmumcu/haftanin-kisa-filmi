@@ -1,7 +1,7 @@
 {
   "name": "Haftanın Kısa Filmi",
   "short_name": "Haftanın Kısa Filmi",
-  "theme_color": "#fa8a6c",
+  "theme_color": "#EC6840",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
