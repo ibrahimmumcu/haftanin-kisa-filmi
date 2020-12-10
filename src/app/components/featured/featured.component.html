@@ -1,0 +1,16 @@
+<img class="play" (click)="showFilm = true" src="/assets/icons/play.svg">
+
+<div class="info">
+  <h1>{{film.title}}</h1>
+  <div class="description">
+    {{film.description}}
+    <a [href]="'https://filmloverss.com/' + film.link" target="_blank" rel="noreferrer">Devamı</a>
+  </div>
+  
+</div>
+
+<div class="player" *ngIf="showFilm">
+  <img (click)="showFilm = false" class="cross" src="/assets/icons/cross.svg">
+  <div #videoContainer class="video-wrapper" [innerHtml]="film.videoEmbed | safe: 'html'">
+  </div>
+</div>

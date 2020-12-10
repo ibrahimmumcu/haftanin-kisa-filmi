@@ -8,7 +8,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HeaderModule } from '../app/components/header/header.module';
 import { FooterModule } from '../app/components/footer/footer.module';
-import { SliderModule } from '../app/components/slider/slider.module';
 
 export function initializeConfig(appService: AppService) {
   return () => appService.loadConfigFile();
@@ -23,7 +22,6 @@ export function initializeConfig(appService: AppService) {
     AppRoutingModule,
     HttpClientModule,
     HeaderModule,
-    SliderModule,
     FooterModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],

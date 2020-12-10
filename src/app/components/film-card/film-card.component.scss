@@ -1,37 +1,46 @@
 :host {
   display: inline-block;
-  position: relative;
 
-  img.featured {
-    height: 240px;
-    width: 180px;
-    object-fit: cover;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-  }
+  .image-container {
+    position: relative;
 
-  img.play {
-    visibility: hidden;
-    height: 64px;
-    width: 64px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
+    img.featured {
+      height: 240px;
+      width: 180px;
+      object-fit: cover;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+  
+    img.play {
+      visibility: hidden;
+      height: 64px;
+      width: 64px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
   }
 
   &:hover {
     cursor: pointer;
 
-    img.featured {
-      transform: scale(1.15);
-    }
+    .image-container {
+      img.featured {
+        transform: scale(1.15);
+      }
 
-    img.play {
-      visibility: visible;
-      transition: all 0.2s ease;
+      img.play {
+        visibility: visible;
+        transition: all 0.2s ease;
+      }
     }
+  }
+
+  .title {
+    max-width: 180px;
   }
 }

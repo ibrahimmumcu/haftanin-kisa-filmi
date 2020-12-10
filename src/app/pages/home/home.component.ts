@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   latestFilms: Film[];
   popularFilms: Film[];
   films: Film[];
+  featuredFilm: Film;
 
   constructor(
     private appService: AppService,
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.latestFilms = this.films.slice(0, 6);
     this.popularFilms = this.films.sort( function() { return 0.5 - Math.random() } ).slice(0, 6);
+    this.featuredFilm = this.films[Math.floor(Math.random() * this.films.length)];;
   }
 
 }
