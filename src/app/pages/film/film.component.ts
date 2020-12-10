@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { AppConfigService } from 'src/app/services/app-config.service';
+import { AppService } from 'src/app/services/app.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,7 +20,7 @@ export class FilmComponent implements OnInit, AfterViewInit {
   slug: string;
 
   constructor(
-    private appConfigService: AppConfigService,
+    private appService: AppService,
     private route: ActivatedRoute,
     private titleService: Title,
     private metaService: Meta,
@@ -36,7 +36,7 @@ export class FilmComponent implements OnInit, AfterViewInit {
   }
 
   private setCurrentMovie() {
-    this.movies = this.appConfigService.movies;
+    this.movies = this.appService.movies;
 
     if (this.slug === null) {
       this.slug = this.movies[0].link;
