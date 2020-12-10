@@ -1,1 +1,21 @@
-film detay
+<featured [film]="film" [isFeatured]="false"></featured>
+
+<div class="container">
+  <div class="section">
+    <div class="section-title">
+      <span>Son Eklenen Filmler</span>
+    </div>
+    <div class="film-card-container">
+      <film-card *ngFor="let film of latestFilms" [film]="film"></film-card>
+    </div>
+  </div>
+  
+  <div class="section">
+    <div class="section-title">
+      <span>Popüler Filmler</span>
+    </div>
+    <div class="film-card-container">
+      <film-card *ngFor="let film of popularFilms" [film]="film"></film-card>
+    </div>
+  </div>
+</div>

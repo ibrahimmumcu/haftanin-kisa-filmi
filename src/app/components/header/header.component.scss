@@ -1,5 +1,16 @@
 :host {
   height: 80px;
-  background: red;
-  display: block;
+  background: #fff;
+
+  .logo {
+    height: 72px;
+    width: 72px;
+    display: inline-block;
+    margin-top: 4px;
+    
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 }

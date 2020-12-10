@@ -8,7 +8,7 @@ export const filmRoutes: Routes = [
     component: FilmComponent,
   },
   {
-    path: ':slug',
+    path: ':link',
     component: FilmComponent,
   }
 ];

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Film } from '../../interfaces/film.interface';
 
@@ -7,9 +7,10 @@ import { Film } from '../../interfaces/film.interface';
   templateUrl: './featured.component.html',
   styleUrls: ['./featured.component.scss']
 })
-export class FeaturedComponent implements OnInit {
+export class FeaturedComponent implements OnInit, OnChanges {
 
   @Input() film: Film;
+  @Input() isFeatured: boolean;
 
   @HostBinding('style.background-image')
   backgroundImage: SafeStyle;
@@ -27,6 +28,17 @@ export class FeaturedComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setBackgroundImage();
+  }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes?.film?.currentValue?.featuredImage) {
+      this.setBackgroundImage();
+    }
+  }
+
+  setBackgroundImage() {
     this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(
       'url('+this.film.featuredImage+')'
     );
