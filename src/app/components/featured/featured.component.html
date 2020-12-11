@@ -1,4 +1,4 @@
-<img class="play" (click)="showFilm = true" src="/assets/icons/play.svg">
+<img class="play" (click)="startPlaying()" src="/assets/icons/play.svg">
 
 <div class="container featured-text-container" *ngIf="isFeatured">
   <span>BU HAFTANIN ÖNE ÇIKANI</span>
@@ -13,10 +13,21 @@
     </div>
     
   </div>
-  
-  <div class="player" *ngIf="showFilm">
-    <img (click)="showFilm = false" class="cross" src="/assets/icons/cross.svg">
-    <div #videoContainer class="video-wrapper" [innerHtml]="film.videoEmbed | safe: 'html'">
+</div>
+
+<div class="curtain" [class.active]="isPlayingClass === 'is-playing'">
+  <div class="curtain__wrapper">
+    <input type="checkbox" #checkCurtain [checked]="isPlayingClass === 'is-playing'">
+    
+    <div class="curtain__panel curtain__panel--left"></div>
+    
+    <div class="curtain__content">
+      <div class="player">
+        <div #videoContainer class="video-wrapper" [innerHtml]="film.videoEmbed | safe: 'html'"></div>
+      </div>
     </div>
+    
+    <div class="curtain__panel curtain__panel--right"></div>
+    
   </div>
 </div>
