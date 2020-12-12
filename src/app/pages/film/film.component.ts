@@ -46,6 +46,7 @@ export class FilmComponent implements OnInit, AfterViewInit {
     }
     this.film = this.films.find(film => film.link === this.link);
     this.setMeta();
+    window.scrollTo(0, 0);
   }
 
   private setMeta() {

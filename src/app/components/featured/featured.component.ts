@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Film } from '../../interfaces/film.interface';
 
@@ -11,20 +11,10 @@ export class FeaturedComponent implements OnInit, OnChanges {
 
   @Input() film: Film;
   @Input() isFeatured: boolean;
-
-  @HostBinding('style.background-image')
-  backgroundImage: SafeStyle;
-
+  @HostBinding('style.background-image') backgroundImage: SafeStyle;
   @HostBinding('class') isPlayingClass = '';
-
-  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    this.showFilm = false;
-  }
-
   @ViewChild('videoContainer') videoContainer: ElementRef;
   @ViewChild('checkCurtain') checkCurtain: ElementRef;
-
-  showFilm = false;
 
   constructor(private sanitizer: DomSanitizer) {
     
@@ -54,7 +44,7 @@ export class FeaturedComponent implements OnInit, OnChanges {
     setTimeout(() => {
       let checkboxElement: HTMLElement = this.checkCurtain.nativeElement as HTMLElement;
       checkboxElement.click();
-    }, 100);
+    }, 500);
     
   }
 
