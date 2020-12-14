@@ -50,6 +50,10 @@ export class AppService {
     return this.http.post(environment.api + 'film/watch/' + link, {}).subscribe();
   }
 
+  getSth() {
+    return this.http.get('/api/get-sth').subscribe();
+  }
+
   private handleError(err: HttpErrorResponse) {
  
     let errorMessage = '';
