@@ -1,7 +1,9 @@
-<featured [film]="featuredFilm" [isFeatured]="true"></featured>
+<ng-container *ngIf="featuredFilm$ | async as featuredFilm">
+  <featured [film]="featuredFilm" [isFeatured]="true"></featured>
+</ng-container>
 
 <div class="container">
-  <div class="section">
+  <div class="section" *ngIf="latestFilms$ | async as latestFilms">
     <div class="section-title">
       <span>Son Eklenen Filmler</span>
     </div>
@@ -10,7 +12,7 @@
     </div>
   </div>
   
-  <div class="section">
+  <div class="section" *ngIf="popularFilms$ | async as popularFilms">
     <div class="section-title">
       <span>Popüler Filmler</span>
     </div>

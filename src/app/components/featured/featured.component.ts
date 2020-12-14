@@ -34,7 +34,7 @@ export class FeaturedComponent implements OnInit, OnChanges {
 
   setBackgroundImage() {
     this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle(
-      'url('+this.film.featuredImage+')'
+      'url('+this.film?.featuredImage+')'
     );
   }
 

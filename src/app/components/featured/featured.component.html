@@ -6,10 +6,10 @@
 
 <div class="content">
   <div class="info">
-    <h1>{{film.title}}</h1>
+    <h1>{{film?.title}}</h1>
     <div class="description">
-      {{film.description}}
-      <a [href]="'https://filmloverss.com/' + film.link" target="_blank" rel="noreferrer">Devamı</a>
+      {{film?.description}}
+      <a [href]="'https://filmloverss.com/' + film?.link" target="_blank" rel="noreferrer">Devamı</a>
     </div>
     
   </div>
@@ -23,7 +23,7 @@
     
     <div class="curtain__content">
       <div class="player">
-        <div #videoContainer class="video-wrapper" [innerHtml]="film.videoEmbed | safe: 'html'"></div>
+        <div #videoContainer class="video-wrapper" [innerHtml]="film?.videoEmbed | safe: 'html'"></div>
       </div>
     </div>
     

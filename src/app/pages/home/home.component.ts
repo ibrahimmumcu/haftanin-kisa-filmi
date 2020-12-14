@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { Film } from '../../interfaces/film.interface';
 
@@ -9,22 +10,20 @@ import { Film } from '../../interfaces/film.interface';
 })
 export class HomeComponent implements OnInit {
 
-  latestFilms: Film[];
-  popularFilms: Film[];
-  films: Film[];
-  featuredFilm: Film;
+  latestFilms$: Observable<Film[]>;
+  popularFilms$: Observable<Film[]>;
+  featuredFilm$: Observable<Film>;
 
   constructor(
     private appService: AppService,
   ) {
-    this.films = this.appService.movies;
+    this.latestFilms$ = this.appService.getLatest();
+    this.popularFilms$ = this.appService.getPopular();
+    this.featuredFilm$ = this.appService.getFeatured();
   }
 
   ngOnInit(): void {
-    this.latestFilms = this.films.slice(0, 6);
-    const popularFilmsArr = this.films.slice();
-    this.popularFilms = popularFilmsArr.sort( function() { return 0.5 - Math.random() } ).slice(0, 6);
-    this.featuredFilm = this.films[Math.floor(Math.random() * this.films.length)];
+
   }
 
 }

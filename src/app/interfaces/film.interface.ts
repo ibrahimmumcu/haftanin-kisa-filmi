@@ -4,4 +4,5 @@ export interface Film {
   link: string;
   title: string;
   videoEmbed: string;
+  id: string;
 }

@@ -1,26 +1,66 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Film } from '../interfaces/film.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  movies = [];
-
   constructor(private http: HttpClient) {
 
   }
 
-  loadConfigFile() {
-    const jsonFile = `https://www.filmloverss.com/kisa/kisa.json`;
-    return new Promise<void>((resolve, reject) => {
-      this.http.get(jsonFile).toPromise().then((data: any) => {
-        this.movies = data;
-        resolve(data);
-      }).catch((response: any) => {
-        reject(`Could not load file '${jsonFile}': ${JSON.stringify(response)}`);
-      });
-    });
+  getFeatured(): Observable<Film> {
+    return this.http.get<Film[]>(environment.api + 'featured').pipe(
+      map((data: Film[]) => {
+        return data[0];
+      }),
+      catchError((error: HttpErrorResponse) => this.handleError(error)))
   }
+
+  getLatest() {
+    return this.http.get<Film[]>(environment.api + 'latest').pipe(
+      map((data: Film[]) => {
+        return data;
+      }),
+      catchError((error: HttpErrorResponse) => this.handleError(error)))
+  }
+
+  getPopular() {
+    return this.http.get<Film[]>(environment.api + 'popular').pipe(
+      map((data: Film[]) => {
+        return data;
+      }),
+      catchError((error: HttpErrorResponse) => this.handleError(error)))
+  }
+
+  getFilm(link: string): Observable<Film> {
+    return this.http.get<Film>(environment.api + 'film/' + link).pipe(
+      map((data: Film) => {
+        return data;
+      }),
+      catchError((error: HttpErrorResponse) => this.handleError(error)))
+  }
+
+  setFilmWatched(link: string) {
+    return this.http.post(environment.api + 'film/watch/' + link, {}).subscribe();
+  }
+
+  private handleError(err: HttpErrorResponse) {
+ 
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+
+        errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+
+        errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+}
 }

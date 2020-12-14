@@ -1,23 +1,22 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film } from 'src/app/interfaces/film.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-film',
   templateUrl: './film.component.html',
   styleUrls: ['./film.component.scss']
 })
-export class FilmComponent implements OnInit, AfterViewInit {
+export class FilmComponent implements AfterViewInit {
 
   @ViewChild('videoContainer') videoContainer: ElementRef;
 
-  films: Film[];
   link: string;
   film: Film;
-  latestFilms: Film[];
-  popularFilms: Film[];
+  popularFilms$: Observable<Film[]>;
 
   constructor(
     private appService: AppService,
@@ -27,39 +26,38 @@ export class FilmComponent implements OnInit, AfterViewInit {
     private router: Router,
   ) {
     this.route.paramMap.subscribe(params => {
-      this.films = this.appService.movies;
       this.link = params.get('link');
-      this.setCurrentMovie();
+
+      if (this.link === null) {
+        this.router.navigate(['/']);
+        return;
+      }
+
+      this.getCurrentFilm(this.link);
+      window.scrollTo(0, 0);
+      this.popularFilms$ = this.appService.getPopular();
     });
   }
 
-  ngOnInit() {
-    this.latestFilms = this.films.slice(0, 6);
-    const popularFilmsArr = this.films.slice();
-    this.popularFilms = popularFilmsArr.sort( function() { return 0.5 - Math.random() } ).slice(0, 6);
+  getCurrentFilm(link: string) {
+    this.appService.getFilm(link).subscribe((film: Film) => {
+      this.film = film;
+      this.setMeta(film);
+    });
+    this.appService.setFilmWatched(link);
   }
 
-  private setCurrentMovie() {
-    if (this.link === null) {
-      this.router.navigate(['/']);
-      return;
-    }
-    this.film = this.films.find(film => film.link === this.link);
-    this.setMeta();
-    window.scrollTo(0, 0);
-  }
-
-  private setMeta() {
-    const title = 'Haftanın Kısa Filmi: ' + this.film.title;
+  private setMeta(film: Film) {
+    const title = 'Haftanın Kısa Filmi: ' + film.title;
     this.titleService.setTitle(title);
     this.metaService.updateTag({property: 'og:title', content: title});
     this.metaService.updateTag({name: 'twitter:text:title', content: title});
-    this.metaService.updateTag({name: 'description', content: this.film.description});
-    this.metaService.updateTag({property: 'og:description', content: this.film.description});
+    this.metaService.updateTag({name: 'description', content: film.description});
+    this.metaService.updateTag({property: 'og:description', content: film.description});
     this.metaService.updateTag({property: 'og:url', content: 'https://www.haftaninkisafilmi.com' + this.router.url});
-    this.metaService.updateTag({property: 'og:image', content: this.film.featuredImage});
-    this.metaService.updateTag({property: 'og:image:secure_url', content: this.film.featuredImage});
-    this.metaService.updateTag({name: 'twitter:image', content: this.film.featuredImage});
+    this.metaService.updateTag({property: 'og:image', content: film.featuredImage});
+    this.metaService.updateTag({property: 'og:image:secure_url', content: film.featuredImage});
+    this.metaService.updateTag({name: 'twitter:image', content: film.featuredImage});
   }
 
   ngAfterViewInit() {
