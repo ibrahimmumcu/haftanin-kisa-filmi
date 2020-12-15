@@ -20,7 +20,7 @@ async function getOneFilm(link, res) {
     console.log(error, 'get one film error');
     return error;
   } finally {
-    console.log('get one film close conn')
+    console.log('get one film close connn')
     client.close();
   }
 }
