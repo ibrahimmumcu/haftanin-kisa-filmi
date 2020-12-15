@@ -5,6 +5,7 @@ const collectionName = 'film';
 export default async function handler(req, res) {
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'max-age=0, s-maxage=86400');
   const result = await getFeatured(res);
   res.json(result)
 }
