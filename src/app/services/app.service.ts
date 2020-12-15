@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Film } from '../interfaces/film.interface';
@@ -15,7 +14,7 @@ export class AppService {
   }
 
   getFeatured(): Observable<Film> {
-    return this.http.get<Film[]>(environment.api + 'featured').pipe(
+    return this.http.get<Film[]>('/api/featured').pipe(
       map((data: Film[]) => {
         return data[0];
       }),
@@ -23,7 +22,7 @@ export class AppService {
   }
 
   getLatest() {
-    return this.http.get<Film[]>(environment.api + 'latest').pipe(
+    return this.http.get<Film[]>('/api/latest').pipe(
       map((data: Film[]) => {
         return data;
       }),
@@ -31,7 +30,7 @@ export class AppService {
   }
 
   getPopular() {
-    return this.http.get<Film[]>(environment.api + 'popular').pipe(
+    return this.http.get<Film[]>('/api/popular').pipe(
       map((data: Film[]) => {
         return data;
       }),
@@ -39,7 +38,7 @@ export class AppService {
   }
 
   getFilm(link: string): Observable<Film> {
-    return this.http.get<Film>(environment.api + 'film/' + link).pipe(
+    return this.http.get<Film>('/api/film/' + link).pipe(
       map((data: Film) => {
         return data;
       }),
@@ -47,11 +46,7 @@ export class AppService {
   }
 
   setFilmWatched(link: string) {
-    return this.http.post(environment.api + 'film/watch/' + link, {}).subscribe();
-  }
-
-  getSth() {
-    return this.http.get('/api/get-sth').subscribe();
+    return this.http.post('/api/film-watch/' + link, {}).subscribe();
   }
 
   private handleError(err: HttpErrorResponse) {

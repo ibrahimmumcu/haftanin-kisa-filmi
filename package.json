@@ -4,7 +4,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ibrahimmumcu/haftanin-kisa-filmi.git"
-},
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
     "@angular/service-worker": "~11.0.3",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
