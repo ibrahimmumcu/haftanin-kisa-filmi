@@ -37,6 +37,14 @@ export class AppService {
       catchError((error: HttpErrorResponse) => this.handleError(error)))
   }
 
+  getAll(page: number, sortBy: string = 'latest') {
+    return this.http.get<Film[]>('/api/all?page='+page+'&sortBy='+sortBy).pipe(
+      map((data: Film[]) => {
+        return data;
+      }),
+      catchError((error: HttpErrorResponse) => this.handleError(error)))
+  }
+
   getFilm(link: string): Observable<Film> {
     return this.http.get<Film>('/api/film/' + link).pipe(
       map((data: Film) => {

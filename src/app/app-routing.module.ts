@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'gizlilik-politikasi',
     loadChildren: () => import('./pages/gizlilik-politikasi/gizlilik-politikasi.module').then(m => m.GizlilikPolitikasiModule),
   },
+  {
+    path: 'filmler',
+    loadChildren: () => import('./pages/filmler/filmler.module').then(m => m.FilmlerModule),
+  },
 ];
 
 @NgModule({
