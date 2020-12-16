@@ -1,7 +1,50 @@
 :host {
-  height: 300px;
+  padding: 16px;
   background: #D6230D;
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin-top: 32px;
   color: #FFF;
+}
+
+.social-links {
+  margin: auto auto 16px auto;
+
+  img {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  a {
+    display: inline-block;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin: 0 8px;
+  }
+
+  .facebook {
+    background: #3b5998;
+  }
+
+  .twitter {
+    background: #1DA1F2;;
+  }
+}
+
+.copyright {
+  text-align: center;
+  font-size: 12px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
