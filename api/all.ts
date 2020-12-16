@@ -37,13 +37,16 @@ async function getAll(page, perPage, sortBy) {
       } else {
         data = await db.collection(collectionName).find().sort({counter:-1}).skip(skip).limit(perPage).toArray();
       }
-      console.log('getFeatured return data')
-      return data;
+
+      const counter = await db.collection(collectionName).countDocuments();
+
+      console.log('all return data')
+      return {data, counter};
     } catch (error) {
-      console.log(error, 'getFeatured error')
+      console.log(error, 'all error')
       return error;
     } finally {
-      console.log('getFeatured close connection')
+      console.log('all close connection')
       client.close()
     }
 }

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Film } from '../interfaces/film.interface';
+import { AllFilm, Film } from '../interfaces/film.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+
+  allFilmCounter = new BehaviorSubject<number>(0);
+  allFilmCounter$ = this.allFilmCounter.asObservable();
 
   constructor(private http: HttpClient) {
 
@@ -38,9 +41,10 @@ export class AppService {
   }
 
   getAll(page: number, sortBy: string = 'latest') {
-    return this.http.get<Film[]>('/api/all?page='+page+'&sortBy='+sortBy).pipe(
-      map((data: Film[]) => {
-        return data;
+    return this.http.get<AllFilm>('/api/all?page='+page+'&sortBy='+sortBy).pipe(
+      map((result: AllFilm) => {
+        this.allFilmCounter.next(result.counter);
+        return result.data;
       }),
       catchError((error: HttpErrorResponse) => this.handleError(error)))
   }

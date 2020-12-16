@@ -5,3 +5,32 @@ film-card {
 skeleton {
   margin-bottom: 24px;
 }
+
+.pagination {
+  list-style-type: none;
+  text-align: center;
+  margin: 32px 0 48px 0;
+
+  li {
+    display: inline-block;
+    font-size: 32px;
+    margin: 0 4px;
+
+    a {
+      color: #222;
+      text-decoration: none;
+      padding: 0 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #EC6840;
+        color: #fff;
+      }
+    }
+
+    &.active {
+      opacity: .3;
+      pointer-events: none;
+    }
+  }
+}

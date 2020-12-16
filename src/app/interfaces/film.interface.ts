@@ -6,3 +6,8 @@ export interface Film {
   videoEmbed: string;
   id: string;
 }
+
+export interface AllFilm {
+  data: Film[];
+  counter: number;
+}

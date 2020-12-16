@@ -10,3 +10,9 @@
     </ng-template>
   </div>
 </div>
+
+<ul class="pagination">
+  <li *ngFor="let number of numberOfPages" [class.active]="number === page">
+    <a [routerLink]="'/filmler/'+sortBy+'/'+number">{{number}}</a>
+  </li>
+</ul>

@@ -10,6 +10,10 @@ export const routes: Routes = [
   {
     path: ':sortBy',
     component: FilmlerComponent,
+  },
+  {
+    path: ':sortBy/:page',
+    component: FilmlerComponent,
   }
 ];
 
