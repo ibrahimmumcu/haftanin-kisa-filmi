@@ -1,23 +1,49 @@
-<ng-container *ngIf="featuredFilm$ | async as featuredFilm">
+<ng-container *ngIf="featuredFilm$ | async as featuredFilm; else featuredFilmLoading">
   <featured [film]="featuredFilm" [isFeatured]="true"></featured>
 </ng-container>
 
+<ng-template #featuredFilmLoading>
+  <skeleton type="featured"></skeleton>
+</ng-template>
+
 <div class="container">
-  <div class="section" *ngIf="latestFilms$ | async as latestFilms">
-    <div class="section-title">
-      <span>Son Eklenen Filmler</span>
-    </div>
-    <div class="film-card-container">
-      <film-card *ngFor="let film of latestFilms" [film]="film"></film-card>
-    </div>
+  <div class="section">
+    <ng-container *ngIf="latestFilms$ | async as latestFilms; else latestFilmLoading">
+      <div class="section-title">
+        <span>Son Eklenen Filmler</span>
+      </div>
+      <div class="film-card-container">
+        <film-card *ngFor="let film of latestFilms" [film]="film"></film-card>
+      </div>
+    </ng-container>
+
+    <ng-template #latestFilmLoading>
+      <div class="section-title">
+        <span>Son Eklenen Filmler</span>
+      </div>
+      <div class="film-card-container">
+        <skeleton type="film-card" *ngFor="let i of [1,2,3,4,5,6]"></skeleton>
+      </div>
+    </ng-template>
   </div>
   
-  <div class="section" *ngIf="popularFilms$ | async as popularFilms">
-    <div class="section-title">
-      <span>Popüler Filmler</span>
-    </div>
-    <div class="film-card-container">
-      <film-card *ngFor="let film of popularFilms" [film]="film"></film-card>
-    </div>
+  <div class="section">
+    <ng-container *ngIf="popularFilms$ | async as popularFilms; else popularFilmsLoading">
+      <div class="section-title">
+        <span>Popüler Filmler</span>
+      </div>
+      <div class="film-card-container">
+        <film-card *ngFor="let film of popularFilms" [film]="film"></film-card>
+      </div>
+    </ng-container>
+
+    <ng-template #popularFilmsLoading>
+      <div class="section-title">
+        <span>Popüler Filmler</span>
+      </div>
+      <div class="film-card-container">
+        <skeleton type="film-card" *ngFor="let i of [1,2,3,4,5,6]"></skeleton>
+      </div>
+    </ng-template>
   </div>
 </div>

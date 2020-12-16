@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutesModule } from './home.routes';
 import { FilmCardModule } from '../../components/film-card/film-card.module';
-import { SliderModule } from '../../components/slider/slider.module';
+import { SkeletonModule } from '../../components/skeleton/skeleton.module';
 import { FeaturedModule } from '../../components/featured/featured.module';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { FeaturedModule } from '../../components/featured/featured.module';
     CommonModule,
     HomeRoutesModule,
     FilmCardModule,
-    SliderModule,
+    SkeletonModule,
     FeaturedModule,
   ]
 })

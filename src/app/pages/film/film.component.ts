@@ -40,6 +40,7 @@ export class FilmComponent implements AfterViewInit {
   }
 
   getCurrentFilm(link: string) {
+    this.film = undefined;
     this.appService.getFilm(link).subscribe((film: Film) => {
       this.film = film;
       this.setMeta(film);
