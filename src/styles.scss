@@ -13,8 +13,9 @@ body, html {
 }
 
 .film-card-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 16px;
   flex-wrap: wrap;
 }
 
