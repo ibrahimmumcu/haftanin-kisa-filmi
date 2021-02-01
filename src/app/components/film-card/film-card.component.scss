@@ -1,0 +1,32 @@
+:host {
+  display: inline-block;
+
+  .image-container {
+    position: relative;
+    transition: all .3s ease-in-out;
+    
+
+    img.featured {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      overflow: hidden;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    &:hover {
+      transform: translate3d(0,-8px,0);
+      box-shadow: 0 52px 74px rgba(0,0,0,.2);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .title {
+    max-width: 180px;
+  }
+}

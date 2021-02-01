@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="all-title">
+    <h1>Tüm Filmler</h1>
+    <span *ngIf="sortBy === 'latest'">(Son Eklenenler)</span>
+    <span *ngIf="sortBy === 'popular'">(Popüler)</span>
+  </div>
+
+  <div class="film-card-container">
+    <ng-container *ngIf="(films$ | async) as films; else filmsLoading">
+      <film-card *ngFor="let film of films" [film]="film"></film-card>
+    </ng-container>
+
+    <ng-template #filmsLoading>
+      <skeleton type="film-card" *ngFor="let i of ' '.repeat(24).split('')"></skeleton>
+    </ng-template>
+  </div>
+</div>
+
+<ul class="pagination">
+  <li *ngFor="let number of numberOfPages" [class.active]="number === page">
+    <a [routerLink]="'/filmler/'+sortBy+'/'+number">{{number}}</a>
+  </li>
+</ul>
