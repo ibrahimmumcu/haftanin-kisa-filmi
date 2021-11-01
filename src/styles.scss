@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -8,7 +9,7 @@ body, html {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
 
   @media screen and (max-width: 1199px) {
@@ -18,19 +19,23 @@ body, html {
 
 .film-card-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  column-gap: 16px;
+  column-gap: 24px;
+  row-gap: 24px;
   flex-wrap: wrap;
 
-  @media screen and (min-width: 800px) and (max-width: 1199px) {
-    grid-template-columns: repeat(4, 1fr);
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (min-width: 480px) and (max-width: 799px) {
+  @media screen and (min-width: 1351px) and (max-width: 1599px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 800px) and (max-width: 1350px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 779px) {
     grid-template-columns: repeat(1, 1fr);
   }
 }

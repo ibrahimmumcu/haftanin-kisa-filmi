@@ -1,16 +1,29 @@
 <div class="container">
-  <a class="logo" [routerLink]="['/']"><img alt="logo" src="/assets/img/logo.svg"><span>logo</span></a>
+  <a class="logo" [routerLink]="['/']">
+    <svg width="333" height="386" viewBox="0 0 333 386" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="115" width="256" height="128" fill="#F0C75E" />
+      <circle cx="80" cy="48" r="48" fill="#D6230D" />
+      <circle cx="198" cy="48" r="36" fill="#02416A" />
+      <line x1="101.658" y1="256.463" x2="3.15206" y2="382.544" stroke="black" stroke-width="8" />
+      <line x1="252.354" y1="382.544" x2="153.848" y2="256.463" stroke="black" stroke-width="8" />
+      <path d="M285 179L321 137.431V220.569L285 179Z" fill="#EC6840" />
+    </svg>
+    <span>logo</span>
+  </a>
+  <!--
   <div class="search-container" *ngIf="false">
-    <img (click)="openSearchOverlay = true" src="assets/icons/search.svg">
+    <img (click)="openSearchOverlay = true" src="assets/icons/search.svg" />
   </div>
+  -->
 </div>
 
+<!---
 <div class="search-result-overlay" *ngIf="openSearchOverlay">
   <div class="search-result-content">
-    <input placeholder="Ara" (keyup)="search($event)">
+    <input placeholder="Ara" (keyup)="search($event)" />
     <div class="film-card-container">
       <ng-container *ngIf="isSearching; else searchResultTemplate">
-        <skeleton type="film-card" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]"></skeleton>
+        <skeleton type="film-card" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"></skeleton>
       </ng-container>
       <ng-template #searchResultTemplate>
         <film-card *ngFor="let film of searchResult" [film]="film"></film-card>
@@ -18,3 +31,4 @@
     </div>
   </div>
 </div>
+-->
