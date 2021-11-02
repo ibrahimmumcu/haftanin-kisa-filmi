@@ -1,4 +1,4 @@
-<div class="container">
+<div class="header-container" [class.movie]="isMoviePage">
   <a class="logo" [routerLink]="['/']">
     <svg width="333" height="386" viewBox="0 0 333 386" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect y="115" width="256" height="128" fill="#F0C75E" />
@@ -10,25 +10,6 @@
     </svg>
     <span>logo</span>
   </a>
-  <!--
-  <div class="search-container" *ngIf="false">
-    <img (click)="openSearchOverlay = true" src="assets/icons/search.svg" />
-  </div>
-  -->
 </div>
 
-<!---
-<div class="search-result-overlay" *ngIf="openSearchOverlay">
-  <div class="search-result-content">
-    <input placeholder="Ara" (keyup)="search($event)" />
-    <div class="film-card-container">
-      <ng-container *ngIf="isSearching; else searchResultTemplate">
-        <skeleton type="film-card" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"></skeleton>
-      </ng-container>
-      <ng-template #searchResultTemplate>
-        <film-card *ngFor="let film of searchResult" [film]="film"></film-card>
-      </ng-template>
-    </div>
-  </div>
-</div>
--->
+<div class="hidden-header" *ngIf="!isMoviePage"></div>
