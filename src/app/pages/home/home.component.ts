@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AppService } from 'src/app/services/app.service';
+import { FilmStore } from 'src/app/stores/film/film.store';
 import { Film } from '../../interfaces/film.interface';
 
 @Component({
@@ -10,9 +10,5 @@ import { Film } from '../../interfaces/film.interface';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  films$: Observable<Film[]>;
-
-  constructor(private appService: AppService) {
-    this.films$ = this.appService.getAll(1, 'latest');
-  }
+  @Select(FilmStore.films) films$: Observable<Film[]>;
 }

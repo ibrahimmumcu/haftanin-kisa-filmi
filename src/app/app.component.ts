@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { filter } from 'rxjs/operators';
+import { LoadAllFilms } from './stores/film/film.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   isMoviePage = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store) {
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -20,5 +22,7 @@ export class AppComponent {
           this.isMoviePage = false;
         }
       });
+
+    this.store.dispatch(new LoadAllFilms());
   }
 }

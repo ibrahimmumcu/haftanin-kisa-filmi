@@ -76,6 +76,10 @@ export class AppService {
     return this.http.post('/api/film-watch/' + link, {}).subscribe();
   }
 
+  loadAllFilms(): Observable<AllFilm> {
+    return this.http.get<AllFilm>(`/api/all?page=1&sortBy=latest&perPage=10000`);
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {

@@ -4,6 +4,8 @@ import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film } from 'src/app/interfaces/film.interface';
 import { Observable } from 'rxjs';
+import { FilmStore } from 'src/app/stores/film/film.store';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-film',
@@ -15,7 +17,7 @@ export class FilmComponent {
 
   link: string;
   film: Film;
-  popularFilms$: Observable<Film[]>;
+  @Select(FilmStore.randomFilms) randomFilms$: Observable<Film[]>;
 
   constructor(
     private appService: AppService,
@@ -37,8 +39,6 @@ export class FilmComponent {
       } else {
         this.getCurrentFilm(this.link);
       }
-
-      this.popularFilms$ = this.appService.getPopular();
     });
   }
 
