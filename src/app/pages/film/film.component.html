@@ -1,4 +1,4 @@
-<featured *ngIf="film; else filmLoading" [film]="film" [isFeatured]="false"></featured>
+<film-player *ngIf="film; else filmLoading" [film]="film" [isFeatured]="false"></film-player>
 
 <ng-template #filmLoading>
   <skeleton type="featured"></skeleton>
