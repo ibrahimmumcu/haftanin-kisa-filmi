@@ -1,4 +1,16 @@
-<img class="play" alt="Bu filmi oynat" (click)="startPlaying()" src="/assets/icons/play.svg">
+<div class="play" alt="Bu filmi oynat" (click)="startPlaying()">
+  <svg
+    fill="none"
+    stroke="#fff"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <polygon points="5 3 19 12 5 21 5 3" />
+  </svg>
+</div>
 
 <div class="container featured-text-container" *ngIf="isFeatured">
   <span>BU HAFTANIN ÖNE ÇIKANI</span>
@@ -6,28 +18,31 @@
 
 <div class="content">
   <div class="info">
-    <h1>{{film?.title}}</h1>
+    <h1>{{ film?.title }}</h1>
     <div class="description">
-      {{film?.description}}
+      {{ film?.description }}
       <a [href]="'https://filmloverss.com/' + film?.link" target="_blank" rel="noreferrer">Devamı</a>
     </div>
-    
   </div>
 </div>
 
 <div class="curtain" [class.active]="isPlayingClass === 'is-playing'">
   <div class="curtain__wrapper">
-    <input type="checkbox" #checkCurtain [checked]="isPlayingClass === 'is-playing'">
-    
+    <input type="checkbox" #checkCurtain [checked]="isPlayingClass === 'is-playing'" />
+
     <div class="curtain__panel curtain__panel--left"></div>
-    
+
     <div class="curtain__content">
       <div class="player">
-        <div #videoContainer *ngIf="isPlayingClass === 'is-playing'" class="video-wrapper" [innerHtml]="film?.videoEmbed | safe: 'html'"></div>
+        <div
+          #videoContainer
+          *ngIf="isPlayingClass === 'is-playing'"
+          class="video-wrapper"
+          [innerHtml]="film?.videoEmbed | safe: 'html'"
+        ></div>
       </div>
     </div>
-    
+
     <div class="curtain__panel curtain__panel--right"></div>
-    
   </div>
 </div>
