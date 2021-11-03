@@ -11,9 +11,6 @@ export class AppService {
   allFilmCounter = new BehaviorSubject<number>(0);
   allFilmCounter$ = this.allFilmCounter.asObservable();
 
-  allFilms = new BehaviorSubject<Film[]>([]);
-  allFilms$ = this.allFilms.asObservable();
-
   constructor(private http: HttpClient) {}
 
   getFeatured(): Observable<Film> {
@@ -47,7 +44,6 @@ export class AppService {
     return this.http.get<AllFilm>(`/api/all?page=${page}&sortBy=${sortBy}&perPage=10000`).pipe(
       map((result: AllFilm) => {
         this.allFilmCounter.next(result.counter);
-        this.allFilms.next(result.data);
         return result.data;
       }),
       catchError((error: HttpErrorResponse) => this.handleError(error)),
