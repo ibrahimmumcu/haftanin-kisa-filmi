@@ -36,6 +36,7 @@ export class FilmStore {
         context.patchState({
           list: result.data,
         });
+        context.dispatch(new LoadRandomFilms());
       }),
     );
   }
