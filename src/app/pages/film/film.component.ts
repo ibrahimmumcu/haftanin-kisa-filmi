@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { Title, Meta } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Film } from 'src/app/interfaces/film.interface';
 import { Observable } from 'rxjs';
 import { FilmStore } from 'src/app/stores/film/film.store';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { LoadRandomFilms } from 'src/app/stores/film/film.actions';
 
 @Component({
   selector: 'app-film',
@@ -25,8 +26,9 @@ export class FilmComponent {
     private titleService: Title,
     private metaService: Meta,
     private router: Router,
+    private store: Store,
   ) {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params: ParamMap) => {
       this.link = params.get('link');
 
       if (this.link === null) {
@@ -39,6 +41,8 @@ export class FilmComponent {
       } else {
         this.getCurrentFilm(this.link);
       }
+
+      this.store.dispatch(new LoadRandomFilms());
     });
   }
 
