@@ -1,7 +1,6 @@
 :host {
-  height: calc(100vh - 80px);
-  max-height: 800px;
-  background: #EC6840;
+  height: 100vh;
+  background: #ec6840;
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,8 +8,9 @@
   position: relative;
 
   &.is-playing {
-    .info{
-      h1, .description {
+    .info {
+      h1,
+      .description {
         display: none;
       }
 
@@ -38,7 +38,7 @@
   text-align: right;
 
   span {
-    background: #EC6840;
+    background: #ec6840;
     color: #fff;
     font-size: 24px;
     margin-top: 16px;
@@ -56,7 +56,7 @@
   }
 }
 
-img.play {
+.play {
   height: 96px;
   width: 96px;
   position: absolute;
@@ -126,16 +126,20 @@ img.play {
   height: 100%;
   overflow: hidden;
   display: none;
+  z-index: 2;
 
   &.active {
     display: block;
   }
-  
+
   &__wrapper {
     width: 100%;
     height: 100%;
-    
-    input[type=checkbox] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input[type='checkbox'] {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -146,17 +150,17 @@ img.play {
       visibility: hidden;
 
       &:checked {
-        &~div.curtain__panel--left {
+        & ~ div.curtain__panel--left {
           transform: translateX(0);
         }
 
-        &~div.curtain__panel--right {
+        & ~ div.curtain__panel--right {
           transform: translateX(0);
         }
       }
     }
   }
-  
+
   &__panel {
     display: flex;
     align-items: center;
@@ -166,19 +170,21 @@ img.play {
     position: relative;
     width: 50%;
     height: calc(100vh - 80px);
-  max-height: 800px;
+    max-height: 800px;
     transition: all 1s ease-out;
     z-index: 2;
+
     &--left {
       justify-content: flex-end;
       transform: translateX(-100%);
     }
+
     &--right {
       justify-content: flex-start;
       transform: translateX(100%);
     }
   }
-  
+
   &__content {
     align-items: center;
     background: #333;
@@ -193,7 +199,7 @@ img.play {
     text-align: center;
     z-index: 1;
     width: 100%;
-    
+
     .player {
       display: block;
       max-width: 100%;
@@ -205,7 +211,7 @@ img.play {
       bottom: 0;
       margin: auto;
       z-index: 3;
-    
+
       img.cross {
         position: absolute;
         top: -72px;
@@ -215,7 +221,7 @@ img.play {
         z-index: 2;
         cursor: pointer;
       }
-    
+
       .video-wrapper {
         position: relative;
         height: 100%;
@@ -223,18 +229,18 @@ img.play {
         max-height: 100%;
         max-width: 100%;
         width: 100%;
-    
+
         ::ng-deep iframe {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          -webkit-box-shadow: 0px 0px 40px 20px rgba(0,0,0,1);
-          -moz-box-shadow: 0px 0px 40px 20px rgba(0,0,0,1);
-          box-shadow: 0px 0px 40px 20px rgba(0,0,0,1);
+          -webkit-box-shadow: 0px 0px 40px 20px rgba(0, 0, 0, 1);
+          -moz-box-shadow: 0px 0px 40px 20px rgba(0, 0, 0, 1);
+          box-shadow: 0px 0px 40px 20px rgba(0, 0, 0, 1);
         }
-    
+
         > ::ng-deep p {
           display: none;
         }

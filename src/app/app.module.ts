@@ -7,11 +7,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HeaderModule } from '../app/components/header/header.module';
 import { FooterModule } from '../app/components/footer/footer.module';
+import { NgxsModule } from '@ngxs/store';
+import { FilmStore } from '../app/stores/film/film.store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +20,11 @@ import { FooterModule } from '../app/components/footer/footer.module';
     HeaderModule,
     FooterModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgxsModule.forRoot([FilmStore], {
+      developmentMode: !environment.production,
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

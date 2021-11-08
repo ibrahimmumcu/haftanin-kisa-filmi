@@ -1,23 +1,23 @@
-<featured *ngIf="film; else filmLoading" [film]="film" [isFeatured]="false"></featured>
+<film-player *ngIf="film; else filmLoading" [film]="film" [isFeatured]="false"></film-player>
 
 <ng-template #filmLoading>
   <skeleton type="featured"></skeleton>
 </ng-template>
 
-<div class="container"> 
+<div class="container" *ngIf="(randomFilms$ | async)?.length !== 0">
   <div class="section">
     <div class="section-title">
-      <span>Popüler Filmler</span>
-      <span class="right"><a [routerLink]="'/filmler/popular'">Tümü</a></span>
+      <span>Rastgele Filmler</span>
+      <span class="right"></span>
     </div>
 
     <div class="film-card-container">
-      <ng-container *ngIf="popularFilms$ | async as popularFilms; else popularFilmsLoading">
-        <film-card *ngFor="let film of popularFilms" [film]="film"></film-card>
+      <ng-container *ngIf="randomFilms$ | async as randomFilms; else randomFilmsLoading">
+        <film-card *ngFor="let film of randomFilms" [film]="film"></film-card>
       </ng-container>
 
-      <ng-template #popularFilmsLoading>
-        <skeleton type="film-card" *ngFor="let i of [1,2,3,4,5,6]"></skeleton>
+      <ng-template #randomFilmsLoading>
+        <skeleton type="film-card" *ngFor="let i of [1, 2, 3, 4, 5, 6]"></skeleton>
       </ng-template>
     </div>
   </div>

@@ -1,42 +1,30 @@
-import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Film } from 'src/app/interfaces/film.interface';
-import { AppService } from 'src/app/services/app.service';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostBinding, HostListener, Inject, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  @Input() isMoviePage: boolean;
 
-  searchTerm$ = new Subject<string>();
-  searchResult: Film[];
-  openSearchOverlay = false;
-  isSearching = false;
+  scrolledClass = '';
 
-  constructor(
-    private appService: AppService,
-  ) {
-    this.searchTerm$.pipe(
-        filter(Boolean),
-        filter((value: string) => value.length > 3),
-        debounceTime(200),
-        distinctUntilChanged()
-      ).subscribe((searchValue: string) => {
-        this.isSearching = true;
-        this.appService.search(searchValue).subscribe((res) => {
-        this.isSearching = false;
-        this.searchResult = res;
-      }, (err) => {
-        this.isSearching = false;
-      });
-    });
+  @HostBinding('class') get class() {
+    return this.scrolledClass;
   }
 
-  search($event) {
-    this.searchTerm$.next($event.target.value);
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.document.body.scrollTop > 0 || this.document.documentElement.scrollTop > 0) {
+      this.scrolledClass = 'scrolled';
+    } else {
+      this.scrolledClass = '';
+    }
   }
 
+  constructor(@Inject(DOCUMENT) private document: Document) {}
+
+  ngOnInit() {}
 }

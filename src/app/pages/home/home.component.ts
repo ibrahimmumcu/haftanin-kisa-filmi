@@ -1,24 +1,14 @@
 import { Component } from '@angular/core';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AppService } from 'src/app/services/app.service';
+import { FilmStore } from 'src/app/stores/film/film.store';
 import { Film } from '../../interfaces/film.interface';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-
-  latestFilms$: Observable<Film[]>;
-  popularFilms$: Observable<Film[]>;
-  featuredFilm$: Observable<Film>;
-
-  constructor(
-    private appService: AppService,
-  ) {
-    this.latestFilms$ = this.appService.getLatest();
-    this.popularFilms$ = this.appService.getPopular();
-    this.featuredFilm$ = this.appService.getFeatured();
-  }
+  @Select(FilmStore.films) films$: Observable<Film[]>;
 }
