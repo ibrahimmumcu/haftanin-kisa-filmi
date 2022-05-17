@@ -38,6 +38,7 @@ export class FilmComponent {
 
       if (this.router.getCurrentNavigation().extras.state?.film) {
         this.film = this.router.getCurrentNavigation().extras.state?.film;
+        this.setMeta(this.film);
       } else {
         this.getCurrentFilm(this.link);
       }
@@ -62,7 +63,7 @@ export class FilmComponent {
     this.metaService.updateTag({ name: 'twitter:text:title', content: title });
     this.metaService.updateTag({ name: 'description', content: film.description });
     this.metaService.updateTag({ property: 'og:description', content: film.description });
-    this.metaService.updateTag({ property: 'og:url', content: 'https://www.haftaninkisafilmi.com' + this.router.url });
+    this.metaService.updateTag({ property: 'og:url', content: 'https://haftaninkisafilmi.com' + this.router.url });
     this.metaService.updateTag({ property: 'og:image', content: film.featuredImage });
     this.metaService.updateTag({ property: 'og:image:secure_url', content: film.featuredImage });
     this.metaService.updateTag({ name: 'twitter:image', content: film.featuredImage });

@@ -8,10 +8,9 @@ import { AppService } from 'src/app/services/app.service';
 @Component({
   selector: 'app-filmler',
   templateUrl: './filmler.component.html',
-  styleUrls: ['./filmler.component.scss']
+  styleUrls: ['./filmler.component.scss'],
 })
 export class FilmlerComponent implements OnInit {
-
   films$: Observable<Film[]>;
   sortBy: string;
   counter$: Observable<number>;
@@ -44,21 +43,31 @@ export class FilmlerComponent implements OnInit {
 
   ngOnInit(): void {
     this.counter$.subscribe((numberOfFilms: number) => {
-      this.numberOfPages = Array(Math.ceil(numberOfFilms / this.perPage)).fill(0).map((x,i)=>i + 1);
-    }); 
+      this.numberOfPages = Array(Math.ceil(numberOfFilms / this.perPage))
+        .fill(0)
+        .map((x, i) => i + 1);
+    });
   }
 
   private setMeta() {
     const title = 'Haftanın Kısa Filmi: Filmler';
     this.titleService.setTitle(title);
-    this.metaService.updateTag({property: 'og:title', content: title});
-    this.metaService.updateTag({name: 'twitter:text:title', content: title});
-    this.metaService.updateTag({name: 'description', content: 'En iyi kısa filmleri izle.'});
-    this.metaService.updateTag({property: 'og:description', content: 'En iyi kısa filmleri izle.'});
-    this.metaService.updateTag({property: 'og:url', content: 'https://www.haftaninkisafilmi.com' + this.router.url});
-    this.metaService.updateTag({property: 'og:image', content: 'https://www.haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png'});
-    this.metaService.updateTag({property: 'og:image:secure_url', content: 'https://www.haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png'});
-    this.metaService.updateTag({name: 'twitter:image', content: 'https://www.haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png'});
+    this.metaService.updateTag({ property: 'og:title', content: title });
+    this.metaService.updateTag({ name: 'twitter:text:title', content: title });
+    this.metaService.updateTag({ name: 'description', content: 'En iyi kısa filmleri izle.' });
+    this.metaService.updateTag({ property: 'og:description', content: 'En iyi kısa filmleri izle.' });
+    this.metaService.updateTag({ property: 'og:url', content: 'https://haftaninkisafilmi.com' + this.router.url });
+    this.metaService.updateTag({
+      property: 'og:image',
+      content: 'https://haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png',
+    });
+    this.metaService.updateTag({
+      property: 'og:image:secure_url',
+      content: 'https://haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:image',
+      content: 'https://haftaninkisafilmi.com/assets/img/haftanin-kisa-filmi.png',
+    });
   }
-
 }
