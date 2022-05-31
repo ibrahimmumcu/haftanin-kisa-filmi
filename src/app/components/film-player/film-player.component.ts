@@ -48,7 +48,11 @@ export class FilmPlayerComponent implements OnInit, OnChanges {
     let iframe = parsedIframe.getElementsByTagName('iframe');
     let src = iframe[0].src;
     const paramMergerChar = src.indexOf('?') > -1 ? '&' : '?';
-    this.film.videoEmbed = this.film.videoEmbed.replace(src, src + paramMergerChar + 'autoplay=1');
+    const autoPlayUrlString = this.film.videoEmbed.replace(src, src + paramMergerChar + 'autoplay=1');
+    this.film = {
+      ...this.film,
+      videoEmbed: autoPlayUrlString,
+    };
 
     const allowAttr = iframe[0].allow;
     if (allowAttr.length === 0) {

@@ -1,4 +1,6 @@
 <div class="image-container">
-  <img class="featured" alt="{{ film.title }} poster" [src]="film.featuredImage" loading="lazy" />
-  <div class="title">{{ film.title }}</div>
+  <a [routerLink]="['/film', film.link]" [state]="{ film: film }">
+    <img class="featured" alt="{{ film.title }} poster" [src]="film.featuredImage" loading="lazy" />
+    <div class="title">{{ film.title }}</div>
+  </a>
 </div>
