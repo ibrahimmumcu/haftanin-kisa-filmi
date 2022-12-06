@@ -1,6 +1,6 @@
 <div class="image-container">
   <a [routerLink]="['/film', film.link]" [state]="{ film: film }">
-    <img class="featured" alt="{{ film.title }} poster" [src]="film.featuredImage" loading="lazy" />
+    <img class="featured" alt="{{ film.title }} poster" [ngSrc]="film.featuredImage" fill />
     <div class="title">{{ film.title }}</div>
   </a>
 </div>

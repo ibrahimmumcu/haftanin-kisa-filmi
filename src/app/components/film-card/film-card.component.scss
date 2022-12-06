@@ -4,10 +4,10 @@
   .image-container {
     position: relative;
     transition: all 0.3s ease-in-out;
+    height: 240px;
+    width: 100%;
 
     img.featured {
-      height: 240px;
-      width: 100%;
       object-fit: cover;
       overflow: hidden;
       display: block;
