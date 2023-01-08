@@ -15,7 +15,6 @@ export class FilmCardComponent {
   }
 
   @Input() film: Film;
-  newImage: string;
 
   constructor(
     private router: Router,
