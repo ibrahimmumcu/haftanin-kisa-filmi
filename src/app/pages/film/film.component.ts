@@ -65,8 +65,8 @@ export class FilmComponent {
     this.metaService.updateTag({ name: 'description', content: film.description });
     this.metaService.updateTag({ property: 'og:description', content: film.description });
     this.metaService.updateTag({ property: 'og:url', content: 'https://haftaninkisafilmi.com' + this.router.url });
-    this.metaService.updateTag({ property: 'og:image', content: this.film.featuredImageFileLocation });
-    this.metaService.updateTag({ property: 'og:image:secure_url', content: this.film.featuredImageFileLocation });
-    this.metaService.updateTag({ name: 'twitter:image', content: this.film.featuredImageFileLocation });
+    this.metaService.updateTag({ property: 'og:image', content: 'https://haftaninkisafilmi.com' + this.film.featuredImageFileLocation });
+    this.metaService.updateTag({ property: 'og:image:secure_url', content: 'https://haftaninkisafilmi.com' + this.film.featuredImageFileLocation });
+    this.metaService.updateTag({ name: 'twitter:image', content: 'https://haftaninkisafilmi.com' + this.film.featuredImageFileLocation });
   }
 }
