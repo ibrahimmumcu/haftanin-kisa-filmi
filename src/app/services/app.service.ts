@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AllFilm, Film } from '../interfaces/film.interface';
+import { AllFilms, Film } from '../interfaces/film.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,47 +11,10 @@ export class AppService {
   allFilmCounter = new BehaviorSubject<number>(0);
   allFilmCounter$ = this.allFilmCounter.asObservable();
 
-  constructor(private http: HttpClient) {}
-
-  getFeatured(): Observable<Film> {
-    return this.http.get<Film[]>('/api/featured').pipe(
-      map((data: Film[]) => {
-        return data[0];
-      }),
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
-    );
-  }
-
-  getLatest(): Observable<Film[]> {
-    return this.http.get<Film[]>('/api/latest').pipe(
-      map((data: Film[]) => {
-        return data;
-      }),
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
-    );
-  }
-
-  getPopular(): Observable<Film[]> {
-    return this.http.get<Film[]>('/api/popular').pipe(
-      map((data: Film[]) => {
-        return data;
-      }),
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
-    );
-  }
-
-  getAll(page: number, sortBy: string = 'latest') {
-    return this.http.get<AllFilm>(`/api/all?page=${page}&sortBy=${sortBy}&perPage=10000`).pipe(
-      map((result: AllFilm) => {
-        this.allFilmCounter.next(result.counter);
-        return result.data;
-      }),
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
-    );
-  }
+  constructor(private httpClient: HttpClient) { }
 
   getFilm(link: string): Observable<Film> {
-    return this.http.get<Film>('/api/film/' + link).pipe(
+    return this.httpClient.get<Film>('/api/film/' + link).pipe(
       map((data: Film) => {
         return data;
       }),
@@ -59,21 +22,12 @@ export class AppService {
     );
   }
 
-  search(searchTerm: string): Observable<Film[]> {
-    return this.http.get<Film[]>('/api/search?searchTerm=' + searchTerm).pipe(
-      map((result: Film[]) => {
-        return result;
-      }),
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
-    );
-  }
-
   setFilmWatched(link: string) {
-    return this.http.post('/api/film-watch/' + link, {}).subscribe();
+    return this.httpClient.post('/api/film-watch/' + link, {}).subscribe();
   }
 
-  loadAllFilms(): Observable<AllFilm> {
-    return this.http.get<AllFilm>(`/api/all?page=1&sortBy=latest&perPage=10000`);
+  loadAllFilms(): Observable<AllFilms> {
+    return this.httpClient.get<AllFilms>(`/api/all?page=1&sortBy=latest&perPage=10000`);
   }
 
   private handleError(err: HttpErrorResponse) {

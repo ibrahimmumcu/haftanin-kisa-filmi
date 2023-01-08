@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { LoadAllFilms, LoadRandomFilms } from './film.actions';
 import { AppService } from '../../services/app.service';
 import { tap } from 'rxjs/operators';
-import { Film } from '../../interfaces/film.interface';
+import { AllFilms, Film } from '../../interfaces/film.interface';
 
 interface FilmModel {
   list: Film[];
@@ -32,10 +32,18 @@ export class FilmStore {
   @Action(LoadAllFilms)
   loadAllFilms(context: StateContext<FilmModel>) {
     return this.appService.loadAllFilms().pipe(
-      tap((result: any) => {
-        context.patchState({
-          list: result.data,
+      tap((result: AllFilms) => {
+
+        let films = result.data;
+        films.forEach((film: Film) => {
+          film.featuredImageFileName = film.featuredImage.replace(/[\#\?].*$/, '').replace(/^.*[\\\/]/, '');
+          film.featuredImageFileLocation = `/assets/images/${film.featuredImageFileName}`;
         });
+
+        context.patchState({
+          list: films,
+        });
+
         context.dispatch(new LoadRandomFilms());
       }),
     );
@@ -61,5 +69,5 @@ export class FilmStore {
     });
   }
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) { }
 }
