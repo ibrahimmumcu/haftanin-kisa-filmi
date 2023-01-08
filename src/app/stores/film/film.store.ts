@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { LoadAllFilms, LoadRandomFilms } from './film.actions';
-import { AppService } from '../../services/app.service';
+import { FilmService } from '../../services/film.service';
 import { tap } from 'rxjs/operators';
 import { AllFilms, Film } from '../../interfaces/film.interface';
 
@@ -31,7 +31,7 @@ export class FilmStore {
 
   @Action(LoadAllFilms)
   loadAllFilms(context: StateContext<FilmModel>) {
-    return this.appService.loadAllFilms().pipe(
+    return this.filmService.loadAllFilms().pipe(
       tap((result: AllFilms) => {
 
         let films = result.data;
@@ -69,5 +69,5 @@ export class FilmStore {
     });
   }
 
-  constructor(private appService: AppService) { }
+  constructor(private filmService: FilmService) { }
 }
