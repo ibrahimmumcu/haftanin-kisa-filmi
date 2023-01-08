@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Film } from '../../interfaces/film.interface';
 
@@ -7,11 +7,11 @@ import { Film } from '../../interfaces/film.interface';
   templateUrl: './film-card.component.html',
   styleUrls: ['./film-card.component.scss']
 })
-export class FilmCardComponent implements OnInit {
+export class FilmCardComponent {
 
   @HostListener('click', ['$event'])
-  onClick(e) {
-    this.router.navigate(['/film', this.film.link], { state: { film: this.film }});
+  onClick() {
+    this.router.navigate(['/film', this.film.link], { state: { film: this.film } });
   }
 
   @Input() film: Film;
@@ -19,9 +19,4 @@ export class FilmCardComponent implements OnInit {
   constructor(
     private router: Router,
   ) { }
-
-  ngOnInit(): void {
-
-  }
-
 }

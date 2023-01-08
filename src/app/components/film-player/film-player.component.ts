@@ -15,7 +15,7 @@ export class FilmPlayerComponent implements OnInit, OnChanges {
   @ViewChild('videoContainer') videoContainer: ElementRef;
   @ViewChild('checkCurtain') checkCurtain: ElementRef;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.setBackgroundImage();
@@ -30,7 +30,7 @@ export class FilmPlayerComponent implements OnInit, OnChanges {
   }
 
   setBackgroundImage() {
-    this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url(' + this.film?.featuredImage + ')');
+    this.backgroundImage = this.sanitizer.bypassSecurityTrustStyle('url(' + this.film?.featuredImageFileLocation + ')');
   }
 
   startPlaying() {
