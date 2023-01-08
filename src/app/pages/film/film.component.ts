@@ -7,7 +7,9 @@ import { filter, Observable } from 'rxjs';
 import { FilmStore } from 'src/app/stores/film/film.store';
 import { Select, Store } from '@ngxs/store';
 import { LoadRandomFilms } from 'src/app/stores/film/film.actions';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-film',
   templateUrl: './film.component.html',
@@ -29,7 +31,7 @@ export class FilmComponent {
     private router: Router,
     private store: Store,
   ) {
-    this.route.paramMap.subscribe((params: ParamMap) => {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params: ParamMap) => {
       this.link = params.get('link');
 
       if (this.link === null) {
@@ -50,7 +52,7 @@ export class FilmComponent {
   }
 
   getCurrentFilm(link: string) {
-    this.films$.pipe(filter(data => data.length > 0)).subscribe((films: Film[]) => {
+    this.films$.pipe(filter(data => data.length > 0), untilDestroyed(this)).subscribe((films: Film[]) => {
       this.film = films.filter((film: Film) => film.link === link)[0];
       this.setMeta(this.film);
       this.filmService.setFilmWatched(link);
