@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { FilmStore } from 'src/app/stores/film/film.store';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Film } from '../../interfaces/film.interface';
 import { Meta, Title } from '@angular/platform-browser';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  @Select(FilmStore.films) films$: Observable<Film[]>;
+export class HomeComponent implements OnInit {
+  films: Film[];
 
-  constructor(private titleService: Title, private metaService: Meta) {
+  constructor(private titleService: Title, private metaService: Meta, private store: Store) {
     this.setMeta();
+  }
+
+  ngOnInit(): void {
+    this.store
+      .select(state => state.film.list)
+      .pipe(untilDestroyed(this))
+      .subscribe((films: Film[]) => {
+        this.films = films;
+      });
   }
 
   private setMeta() {
