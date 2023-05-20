@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { filter } from 'rxjs/operators';
 import { LoadAllFilms } from './stores/film/film.actions';
+import { inject } from '@vercel/analytics/*';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,8 @@ export class AppComponent {
           this.isMoviePage = false;
         }
       });
+
+    inject();
 
     this.store.dispatch(new LoadAllFilms());
   }

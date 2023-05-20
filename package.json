@@ -26,6 +26,7 @@
     "@angular/service-worker": "^16.0.2",
     "@ngneat/until-destroy": "^9.2.2",
     "@ngxs/store": "^3.8.1",
+    "@vercel/analytics": "^1.0.1",
     "express": "^4.18.2",
     "mongodb": "^5.5.0",
     "node-fetch": "^3.3.1",
