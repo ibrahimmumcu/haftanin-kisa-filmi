@@ -1,7 +1,6 @@
 <div class="container">
   <div class="film-card-container">
-    <ng-container *ngIf="films$ | async as films">
-      <ng-container *ngIf="films.length > 0; else filmsLoading"></ng-container>
+    <ng-container *ngIf="films.length > 0; else filmsLoading">
       <film-card *ngFor="let film of films" [film]="film"></film-card>
     </ng-container>
 

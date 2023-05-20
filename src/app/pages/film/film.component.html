@@ -4,7 +4,7 @@
   <skeleton type="featured"></skeleton>
 </ng-template>
 
-<div class="container" *ngIf="(randomFilms$ | async)?.length !== 0">
+<div class="container">
   <div class="section">
     <div class="section-title">
       <span>Rastgele Filmler</span>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="film-card-container">
-      <ng-container *ngIf="randomFilms$ | async as randomFilms; else randomFilmsLoading">
+      <ng-container *ngIf="randomFilms?.length > 0; else randomFilmsLoading">
         <film-card *ngFor="let film of randomFilms" [film]="film"></film-card>
       </ng-container>
 

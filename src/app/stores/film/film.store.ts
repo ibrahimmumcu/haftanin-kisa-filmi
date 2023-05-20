@@ -33,7 +33,6 @@ export class FilmStore {
   loadAllFilms(context: StateContext<FilmModel>) {
     return this.filmService.loadAllFilms().pipe(
       tap((result: AllFilms) => {
-
         let films = result.data;
         films.forEach((film: Film) => {
           film.featuredImageFileName = film.featuredImage.replace(/[\#\?].*$/, '').replace(/^.*[\\\/]/, '');
@@ -69,5 +68,5 @@ export class FilmStore {
     });
   }
 
-  constructor(private filmService: FilmService) { }
+  constructor(private filmService: FilmService) {}
 }
