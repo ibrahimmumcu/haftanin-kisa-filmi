@@ -70,6 +70,12 @@ export class FilmComponent implements OnInit {
       )
       .subscribe((films: Film[]) => {
         this.film = films.filter((film: Film) => film.link === link)[0];
+
+        if (!this.film) {
+          this.router.navigate(['/']);
+          return;
+        }
+
         this.setMeta(this.film);
         this.filmService.setFilmWatched(link);
       });
